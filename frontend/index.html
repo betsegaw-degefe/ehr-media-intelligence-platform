@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EHR Media Search</title>
+  <meta name="description" content="Semantic search over synthetic FHIR R4 patient media records with AI summaries." />
+  <!-- Tailwind Play CDN keeps the project build-free; see README for a compiled-CSS production setup. -->
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] } } },
+    };
+  </script>
+  <style>
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+  <a href="#search-input" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-3 focus:py-2 focus:shadow">Skip to search</a>
+
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
+      <div class="flex items-center gap-3">
+        <div class="grid h-9 w-9 place-items-center rounded-lg bg-teal-600 text-white" aria-hidden="true">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-3-3v6m9-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <h1 class="text-lg font-semibold leading-tight">EHR Media Intelligence</h1>
+          <p class="text-xs text-slate-500">Semantic search across notes, imaging and lab reports</p>
+        </div>
+      </div>
+      <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-800">Synthetic data · not for clinical use</span>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+    <!-- Search + filters -->
+    <section aria-labelledby="search-heading" class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+      <h2 id="search-heading" class="sr-only">Search patient records</h2>
+      <form id="search-form" role="search" class="flex flex-col gap-3" novalidate>
+        <div class="flex flex-col gap-2 sm:flex-row">
+          <label for="search-input" class="sr-only">Search records in natural language</label>
+          <div class="relative flex-1">
+            <svg class="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z"/></svg>
+            <input id="search-input" name="q" type="search" autocomplete="off" autofocus
+              placeholder="e.g. suspicious breast imaging, low hemoglobin, heart failure discharge…"
+              aria-describedby="search-hint"
+              class="w-full rounded-lg border border-slate-300 py-2.5 pl-10 pr-3 text-base focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/30" />
+          </div>
+          <button type="submit" class="rounded-lg bg-teal-600 px-5 py-2.5 font-medium text-white hover:bg-teal-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2">Search</button>
+        </div>
+        <p id="search-hint" class="text-xs text-slate-500">Results update as you type. Press <kbd class="rounded border bg-slate-50 px-1">/</kbd> to focus search, <kbd class="rounded border bg-slate-50 px-1">↑</kbd><kbd class="rounded border bg-slate-50 px-1">↓</kbd> to move between results, <kbd class="rounded border bg-slate-50 px-1">Enter</kbd> to open.</p>
+
+        <fieldset class="grid grid-cols-1 gap-3 sm:grid-cols-4">
+          <legend class="sr-only">Filters</legend>
+          <div>
+            <label for="filter-type" class="mb-1 block text-xs font-medium text-slate-600">Resource type</label>
+            <select id="filter-type" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/30">
+              <option value="">All types</option>
+              <option value="DocumentReference">DocumentReference (notes)</option>
+              <option value="DiagnosticReport">DiagnosticReport (imaging, labs)</option>
+              <option value="AISummary">AI summary (patient-level)</option>
+            </select>
+          </div>
+          <div>
+            <label for="filter-from" class="mb-1 block text-xs font-medium text-slate-600">From date</label>
+            <input id="filter-from" type="date" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/30" />
+          </div>
+          <div>
+            <label for="filter-to" class="mb-1 block text-xs font-medium text-slate-600">To date</label>
+            <input id="filter-to" type="date" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/30" />
+          </div>
+          <div class="flex items-end">
+            <button type="button" id="clear-filters" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600">Clear filters</button>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+
+    <!-- Status + results -->
+    <section aria-labelledby="results-heading" class="mt-6">
+      <div class="mb-3 flex items-baseline justify-between gap-2">
+        <h2 id="results-heading" class="text-sm font-semibold uppercase tracking-wide text-slate-500">Results</h2>
+        <p id="status" class="text-sm text-slate-500" role="status" aria-live="polite"></p>
+      </div>
+      <div id="error" class="hidden rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800" role="alert"></div>
+      <div id="loading" class="hidden space-y-3" aria-hidden="true">
+        <div class="h-32 animate-pulse rounded-xl bg-slate-200/70"></div>
+        <div class="h-32 animate-pulse rounded-xl bg-slate-200/70"></div>
+        <div class="h-32 animate-pulse rounded-xl bg-slate-200/70"></div>
+      </div>
+      <ol id="results" class="space-y-3" aria-label="Search results"></ol>
+      <div id="empty" class="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center">
+        <p id="empty-title" class="font-medium text-slate-700">Search across all patient media records</p>
+        <p id="empty-body" class="mt-1 text-sm text-slate-500">Ask in plain language. Try one of these:</p>
+        <div id="suggestions" class="mt-4 flex flex-wrap justify-center gap-2"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Patient detail drawer -->
+  <div id="drawer-backdrop" class="fixed inset-0 z-40 hidden bg-slate-900/40" aria-hidden="true"></div>
+  <aside id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1"
+    class="fixed inset-y-0 right-0 z-50 hidden w-full max-w-2xl overflow-y-auto bg-white shadow-2xl focus:outline-none">
+    <div class="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-slate-200 bg-white px-5 py-4">
+      <div>
+        <h2 id="drawer-title" class="text-lg font-semibold">Patient</h2>
+        <p id="drawer-subtitle" class="text-sm text-slate-500"></p>
+      </div>
+      <button id="drawer-close" type="button" aria-label="Close patient details"
+        class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600">
+        <svg class="h-5 w-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div id="drawer-body" class="space-y-6 px-5 py-5"></div>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
