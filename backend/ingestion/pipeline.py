@@ -248,16 +248,32 @@ def _lab_records(rows: list[dict[str, Any]], stats: Counter) -> list[CleanRecord
     return out
 
 
+# FHIR ids allow [A-Za-z0-9-.]{1,64}. Record ids are capped below 64 so the mapper's "-<n>" Observation suffixes
+# still fit without truncation.
+MAX_RECORD_ID = 60
+
+
+def _fhir_safe_id(raw: str) -> str:
+    return re.sub(r"[^A-Za-z0-9\-.]", "-", raw)[:MAX_RECORD_ID].strip("-.") or "record"
+
+
 def _ensure_unique_ids(records: list[CleanRecord], stats: Counter) -> None:
-    """record_id becomes the FHIR resource id and the audit-table key, so it must be unique. Source systems
-    can reuse ids (e.g. two exports both starting at EPIC-0001), so later collisions get a suffix."""
+    """record_id becomes the FHIR resource id and the audit-table key, so it is made FHIR-safe here (once, with an
+    audit entry) and then unique. After this, record_id == FHIR id everywhere. Source systems can reuse ids, and
+    different raw ids can sanitize to the same value (DOC_2025:17 and DOC-2025-17), so collisions get a suffix."""
     taken: set[str] = set()
     for r in records:
+        safe = _fhir_safe_id(r.record_id)
+        if safe != r.record_id:
+            r.audit.append(AuditEntry(field="record_id", action="normalized", old=r.record_id, new=safe,
+                                      reason="converted to a valid FHIR id ([A-Za-z0-9-.], at most "
+                                             f"{MAX_RECORD_ID} characters)"))
+            r.record_id = safe
+            stats["record_ids_sanitized"] += 1
         if r.record_id in taken:
             n = 2
-            while f"{r.record_id}-{n}" in taken:
+            while (new := f"{r.record_id[:MAX_RECORD_ID - len(str(n)) - 1]}-{n}") in taken:
                 n += 1
-            new = f"{r.record_id}-{n}"
             r.audit.append(AuditEntry(field="record_id", action="normalized", old=r.record_id, new=new,
                                       reason="record id already used by another record; suffixed to keep it unique"))
             r.record_id = new

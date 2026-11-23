@@ -260,3 +260,21 @@ def test_txt_header_found_with_separator_variants(tmp_path, sep):
                                             ("O'BRIEN", "O'Brien"), ("smith-jones", "Smith-Jones")])
 def test_name_capitalization(value, expected):
     assert C._title(value) == expected
+
+
+def test_record_ids_are_fhir_safe_and_unique_after_sanitizing():
+    """Code review: DOC_2025:17 and DOC-2025-17 became the same FHIR id (pipeline crash), and sanitized ids lost
+    their audit trail because the audit table was keyed by the raw id."""
+    import re
+
+    from backend.ingestion.pipeline import MAX_RECORD_ID
+
+    fhir_id_rule = re.compile(r"[A-Za-z0-9\-.]{1,64}")  # FHIR R4 id datatype
+
+    recs = [raw(record_id="DOC_2025:17", text="one"), raw(record_id="DOC-2025-17", text="two"),
+            raw(record_id="X" * 80, text="three"), raw(record_id="Y" * 80, date="2025-03-01", text="four"),
+            raw(record_id="Y" * 80, date="2025-04-01", text="five")]
+    ids = [r.record_id for r in clean_raw_records(recs, today=TODAY).records]
+    assert len(set(ids)) == len(ids)
+    assert all(fhir_id_rule.fullmatch(i) and len(i) <= MAX_RECORD_ID for i in ids)  # already a valid FHIR id
+    assert all(fhir_id_rule.fullmatch(i + "-99") for i in ids)  # Observation suffixes fit without truncation
