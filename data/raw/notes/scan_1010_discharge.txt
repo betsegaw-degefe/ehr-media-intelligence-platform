@@ -1,0 +1,18 @@
+PATIENT: ANDERSON, THOMAS
+MRN: MRN00001010
+DOB: 1944-08-15
+SEX: MALE
+DATE OF SERVICE: October 12, 2025
+DOCUMENT TYPE: Discharge Summary
+TITLE: Discharge Summary
+----
+Chief Complaint: Sudden right-sided weakness and difficulty speaking.
+
+History: 81-year-old male, last known well 90 minutes before arrival, NIHSS 9. Received IV tenecteplase. Telemetry showed paroxysmal atrial fibrillation.
+
+Assessment:
+1. Acute ischemic stroke, left MCA territory
+2. Paroxysmal atrial fibrillation
+3. Expressive aphasia
+
+Plan: Start apixaban on day 4, atorvastatin 80 mg, inpatient rehabilitation, speech therapy.

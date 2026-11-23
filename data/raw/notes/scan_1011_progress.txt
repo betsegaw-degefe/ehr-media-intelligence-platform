@@ -1,0 +1,17 @@
+PATIENT: Grace Kim
+MRN: MRN-001011
+DOB: 10/03/1995
+SEX: F
+DATE OF SERVICE: 20250422
+DOCUMENT TYPE: Progress Note
+TITLE: Primary Care Progress Note
+----
+Chief Complaint: Fatigue and shortness of breath on exertion for 2 months.
+
+History: 29-year-old female with heavy menstrual bleeding. Conjunctival pallor. No GI bleeding symptoms.
+
+Assessment:
+1. Iron deficiency anemia
+2. Menorrhagia
+
+Plan: Oral ferrous sulfate every other day, pelvic ultrasound, gynecology referral.

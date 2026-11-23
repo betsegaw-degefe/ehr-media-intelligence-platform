@@ -1,0 +1,345 @@
+{
+  "source": "SIMULATED-EPIC-EXPORT",
+  "records": [
+    {
+      "id": "EPIC-0001",
+      "patient_id": "1001",
+      "first_name": "Maria",
+      "last_name": "Gonzalez",
+      "birth_date": "03/14/1958",
+      "gender": "female",
+      "encounter": "ENC-1001-20250210",
+      "type": "Progress Note",
+      "description": "Endocrinology Progress Note",
+      "date": "February 10, 2025",
+      "text": "Chief Complaint: Poorly controlled blood sugars and a non-healing wound on the left foot.\n\nHistory: 67-year-old female with type 2 diabetes mellitus for 15 years on metformin and glargine. Reports polyuria and fatigue. Exam: 1.5 cm shallow ulcer on plantar surface of left first metatarsal head, no purulence, monofilament sensation reduced bilaterally.\n\nAssessment:\n1. Type 2 diabetes mellitus with hyperglycemia\n2. Diabetic foot ulcer, left foot\n3. Diabetic peripheral neuropathy\n\nPlan: Increase glargine to 28 units nightly, add empagliflozin, podiatry and wound care referral."
+    },
+    {
+      "record_id": "EPIC-0002",
+      "patient": {
+        "mrn": "001001",
+        "name": "Gonzalez, Maria",
+        "dob": "14 Mar 1958",
+        "sex": "2"
+      },
+      "encounter_id": "ENC-1001-20250211",
+      "document_type": "Imaging Report - X-ray",
+      "title": "XR Left Foot 3 Views",
+      "service_date": "February 11, 2025",
+      "content": "Exam: XR Left Foot 3 Views\nFindings: Soft tissue swelling adjacent to the first metatarsal head. No cortical erosion or periosteal reaction.\nImpression: No radiographic evidence of osteomyelitis."
+    },
+    {
+      "id": "EPIC-0003",
+      "patient_id": "mrn 1002",
+      "first_name": "James",
+      "last_name": "Whitfield",
+      "birth_date": "November 02, 1949",
+      "gender": "Male",
+      "encounter": "ENC-1002-20250318",
+      "type": "Discharge Summary",
+      "description": "Discharge Summary",
+      "date": "03/18/25",
+      "text": "Chief Complaint: Worsening shortness of breath and leg swelling for one week.\n\nHistory: 76-year-old male with heart failure with reduced ejection fraction (EF 30%) admitted with acute decompensated heart failure. Diuresed with IV furosemide, net negative 4.2 L. Weight down 3.8 kg.\n\nAssessment:\n1. Acute on chronic systolic heart failure\n2. Hyponatremia\n3. Hypertension\n\nPlan: Furosemide 40 mg twice daily, continue carvedilol and sacubitril-valsartan. Daily weights. Cardiology follow-up in 7 days."
+    },
+    {
+      "record_id": "EPIC-0004",
+      "patient": {
+        "mrn": " 1002 ",
+        "name": "James Whitfield",
+        "dob": "19491102",
+        "sex": "m "
+      },
+      "encounter_id": "ENC-1002-20250315",
+      "document_type": "Imaging Report - X-ray",
+      "title": "XR Chest 2 Views",
+      "service_date": "03/15/25",
+      "content": "Exam: XR Chest 2 Views\nFindings: Cardiomegaly. Bilateral interstitial opacities and small bilateral pleural effusions.\nImpression: Findings consistent with pulmonary edema and cardiomegaly."
+    },
+    {
+      "id": "EPIC-0005",
+      "patient_id": "MRN00001003",
+      "first_name": "Aisha",
+      "last_name": "Rahman",
+      "encounter": "ENC-1003-20250106",
+      "type": "Emergency Department Note",
+      "description": "Emergency Department Note",
+      "date": "2025-01-06",
+      "text": "Chief Complaint: Fever, productive cough and right-sided pleuritic chest pain for 3 days.\n\nHistory: 34-year-old female, temperature 39.1 C, HR 108, SpO2 93% on room air. Crackles over the right lower lung field. No recent travel or hospitalization.\n\nAssessment:\n1. Community-acquired pneumonia, right lower lobe\n2. Sepsis ruled out\n\nPlan: Amoxicillin-clavulanate plus azithromycin for 5 days, return precautions, PCP follow-up in 1 week."
+    },
+    {
+      "record_id": "EPIC-0006",
+      "patient": {
+        "mrn": "MRN-001003",
+        "name": "RAHMAN, AISHA",
+        "dob": "1990-07-22T09:30:00Z",
+        "sex": "F"
+      },
+      "encounter_id": "ENC-1003-20250106",
+      "document_type": "Imaging Report - X-ray",
+      "title": "XR Chest 2 Views",
+      "service_date": "2025-01-06",
+      "content": "Exam: XR Chest 2 Views\nFindings: Dense consolidation in the right lower lobe with air bronchograms. No pleural effusion.\nImpression: Right lower lobe pneumonia."
+    },
+    {
+      "id": "EPIC-0007",
+      "patient_id": "1004",
+      "first_name": "Robert",
+      "last_name": "Chen",
+      "birth_date": "1962-01-30",
+      "gender": "male",
+      "encounter": "ENC-1004-20250402",
+      "type": "Discharge Summary",
+      "description": "Discharge Summary",
+      "date": "02 Apr 2025",
+      "text": "Chief Complaint: Increased dyspnea and sputum production.\n\nHistory: 63-year-old male former smoker (40 pack-years) with COPD admitted for acute exacerbation. Treated with nebulized bronchodilators, prednisone and doxycycline. CT obtained to exclude pulmonary embolism.\n\nAssessment:\n1. COPD with acute exacerbation\n2. Incidental 8 mm pulmonary nodule, right upper lobe\n\nPlan: Prednisone taper, tiotropium. Repeat CT chest in 3 months for nodule follow-up per Fleischner guidance."
+    },
+    {
+      "record_id": "EPIC-0008",
+      "patient": {
+        "mrn": "001004",
+        "name": "Chen, Robert",
+        "dob": "01/30/1962",
+        "sex": "1"
+      },
+      "encounter_id": "ENC-1004-20250330",
+      "document_type": "Imaging Report - CT",
+      "title": "CT Chest Angiogram",
+      "service_date": "30 Mar 2025",
+      "content": "Exam: CT Chest Angiogram\nFindings: No pulmonary embolism. Centrilobular emphysema, upper lobe predominant. 8 mm solid nodule in the right upper lobe.\nImpression: No PE. Emphysema. 8 mm indeterminate right upper lobe nodule; follow-up CT recommended."
+    },
+    {
+      "id": "EPIC-0009",
+      "patient_id": "mrn 1005",
+      "first_name": "Linda",
+      "last_name": "Okafor",
+      "birth_date": "05 Sep 1971",
+      "gender": "Female ",
+      "encounter": "ENC-1005-20250520",
+      "type": "Consultation Note",
+      "description": "Breast Surgery Consultation",
+      "date": "20250520",
+      "text": "Chief Complaint: Palpable lump in the left breast noticed 4 weeks ago.\n\nHistory: 53-year-old female, no family history of breast cancer. Exam: 2 cm firm, mobile mass at the left breast 2 o'clock position, no axillary lymphadenopathy.\n\nAssessment:\n1. Left breast mass, BI-RADS 4 on imaging\n\nPlan: Ultrasound-guided core needle biopsy scheduled. Discussed possible outcomes."
+    },
+    {
+      "record_id": "EPIC-0010",
+      "patient": {
+        "mrn": " 1005 ",
+        "name": "Linda Okafor",
+        "dob": "September 05, 1971",
+        "sex": "f"
+      },
+      "encounter_id": "ENC-1005-20250515",
+      "document_type": "Imaging Report - Mammography",
+      "title": "Diagnostic Mammogram and Ultrasound, Left",
+      "service_date": "20250515",
+      "content": "Exam: Diagnostic Mammogram and Ultrasound, Left\nFindings: Irregular 1.9 cm hypoechoic mass with indistinct margins at 2 o'clock, 6 cm from the nipple.\nImpression: BI-RADS 4C: high suspicion for malignancy. Tissue sampling recommended."
+    },
+    {
+      "id": "EPIC-0011",
+      "patient_id": "MRN00001006",
+      "first_name": "David",
+      "last_name": "Miller",
+      "birth_date": "19851211",
+      "gender": "MALE",
+      "encounter": "ENC-1006-20250603",
+      "type": "Emergency Department Note",
+      "description": "Emergency Department Note",
+      "date": "2025-06-03T09:30:00Z",
+      "text": "Chief Complaint: Right wrist pain after a fall on an outstretched hand.\n\nHistory: 39-year-old male fell from a ladder. Swelling and tenderness of the distal right radius, neurovascularly intact.\n\nAssessment:\n1. Closed fracture of the distal right radius\n\nPlan: Closed reduction, sugar-tong splint, orthopedics follow-up in 5 days."
+    },
+    {
+      "record_id": "EPIC-0012",
+      "patient": {
+        "mrn": "MRN-001006",
+        "name": "MILLER, DAVID",
+        "dob": "12/11/85",
+        "sex": "M"
+      },
+      "encounter_id": "ENC-1006-20250603",
+      "document_type": "Imaging Report - X-ray",
+      "title": "XR Right Wrist 3 Views",
+      "service_date": "2025-06-03T09:30:00Z",
+      "content": "Exam: XR Right Wrist 3 Views\nFindings: Transverse fracture of the distal radial metaphysis with 15 degrees of dorsal angulation.\nImpression: Distal radius fracture (Colles type)."
+    },
+    {
+      "id": "EPIC-0013",
+      "patient_id": "1007",
+      "first_name": "Patricia",
+      "last_name": "Nguyen",
+      "birth_date": "1953-04-18T09:30:00Z",
+      "gender": "female",
+      "encounter": "ENC-1007-20250708",
+      "type": "Consultation Note",
+      "description": "Nephrology Consultation",
+      "date": "07/08/2025",
+      "text": "Chief Complaint: Rising creatinine noted by primary care.\n\nHistory: 72-year-old female with long-standing hypertension and type 2 diabetes. On lisinopril and spironolactone. No NSAID use.\n\nAssessment:\n1. Chronic kidney disease stage 3b\n2. Hyperkalemia\n3. Hypertension\n\nPlan: Stop spironolactone, low-potassium diet, repeat BMP in 1 week."
+    },
+    {
+      "record_id": "EPIC-0014",
+      "patient": {
+        "mrn": "001007",
+        "name": "Nguyen, Patricia",
+        "dob": "1953-04-18",
+        "sex": "2"
+      },
+      "encounter_id": "ENC-1007-20250710",
+      "document_type": "Imaging Report - Ultrasound",
+      "title": "US Renal Bilateral",
+      "service_date": "07/10/2025",
+      "content": "Exam: US Renal Bilateral\nFindings: Right kidney 9.1 cm, left kidney 9.4 cm with increased cortical echogenicity. No hydronephrosis.\nImpression: Findings consistent with medical renal disease. No obstruction."
+    },
+    {
+      "id": "EPIC-0015",
+      "patient_id": "mrn 1008",
+      "first_name": "Kevin",
+      "last_name": "O'Brien",
+      "birth_date": "06/27/2001",
+      "gender": "Male",
+      "encounter": "ENC-1008-20250814",
+      "type": "Emergency Department Note",
+      "description": "Emergency Department Note",
+      "date": "August 14, 2025",
+      "text": "Chief Complaint: Wheezing and chest tightness after exposure to wildfire smoke.\n\nHistory: 24-year-old male with mild persistent asthma. Peak flow 55% of predicted, improved to 80% after three albuterol-ipratropium nebulizers.\n\nAssessment:\n1. Asthma exacerbation, moderate\n\nPlan: Prednisone 40 mg for 5 days, start inhaled budesonide-formoterol, asthma action plan reviewed."
+    },
+    {
+      "record_id": "EPIC-0016",
+      "patient": {
+        "mrn": " 1008 ",
+        "name": "Kevin O'Brien",
+        "dob": "27 Jun 2001",
+        "sex": "m "
+      },
+      "encounter_id": "ENC-1008-20250814",
+      "document_type": "Imaging Report - X-ray",
+      "title": "XR Chest 1 View",
+      "service_date": "August 14, 2025",
+      "content": "Exam: XR Chest 1 View\nFindings: Mild hyperinflation. No focal consolidation or pneumothorax.\nImpression: No acute cardiopulmonary process."
+    },
+    {
+      "id": "EPIC-0017",
+      "patient_id": "MRN00001009",
+      "first_name": "Sandra",
+      "last_name": "Williams",
+      "birth_date": "February 09, 1966",
+      "gender": "FEMALE",
+      "encounter": "ENC-1009-20250903",
+      "type": "Imaging Report - CT",
+      "description": "CT Head without Contrast",
+      "date": "09/03/25",
+      "text": "Exam: CT Head without Contrast\nFindings: No intracranial hemorrhage, mass effect or acute infarct.\nImpression: Negative non-contrast head CT."
+    },
+    {
+      "record_id": "EPIC-0018",
+      "patient": {
+        "mrn": "MRN-001010",
+        "name": "ANDERSON, THOMAS",
+        "dob": "19440815",
+        "sex": "M"
+      },
+      "encounter_id": "ENC-1010-20251008",
+      "document_type": "Imaging Report - MRI",
+      "title": "MRI Brain without Contrast",
+      "service_date": "10/08/25",
+      "content": "Exam: MRI Brain without Contrast\nFindings: Restricted diffusion in the left frontal operculum and insula consistent with acute infarct.\nImpression: Acute left MCA territory infarct. No hemorrhagic transformation."
+    },
+    {
+      "id": "EPIC-0019",
+      "patient_id": "1011",
+      "first_name": "Grace",
+      "last_name": "Kim",
+      "birth_date": "10/03/95",
+      "gender": "female",
+      "encounter": "ENC-1011-20250429",
+      "type": "Imaging Report - Ultrasound",
+      "description": "US Pelvis Transvaginal",
+      "date": "2025-04-29",
+      "text": "Exam: US Pelvis Transvaginal\nFindings: Enlarged uterus with two intramural fibroids measuring 3.2 cm and 2.1 cm.\nImpression: Uterine fibroids, likely cause of menorrhagia."
+    },
+    {
+      "record_id": "EPIC-0020",
+      "patient": {
+        "mrn": "001012",
+        "name": "Brown, Michael",
+        "dob": "1978-05-21T09:30:00Z",
+        "sex": "1"
+      },
+      "encounter_id": "ENC-1012-20251102",
+      "document_type": "Imaging Report - CT",
+      "title": "CT Abdomen and Pelvis with Contrast",
+      "service_date": "2025-11-02",
+      "content": "Exam: CT Abdomen and Pelvis with Contrast\nFindings: Dilated 11 mm appendix with wall enhancement and periappendiceal fat stranding. No abscess.\nImpression: Acute uncomplicated appendicitis."
+    },
+    {
+      "id": "EPIC-0021",
+      "patient_id": "mrn 1013",
+      "first_name": "Elena",
+      "last_name": "Petrova",
+      "birth_date": "1960-12-29",
+      "gender": "Female ",
+      "encounter": "ENC-1013-20250618",
+      "type": "Imaging Report - Echocardiogram",
+      "description": "Transthoracic Echocardiogram",
+      "date": "18 Jun 2025",
+      "text": "Exam: Transthoracic Echocardiogram\nFindings: Left ventricular ejection fraction 55%. Moderate left atrial enlargement. No significant valve disease.\nImpression: Preserved LV function with moderate left atrial enlargement."
+    },
+    {
+      "record_id": "EPIC-0022",
+      "patient": {
+        "mrn": " 1015 ",
+        "name": "Fatima Hassan",
+        "dob": "01/17/1982",
+        "sex": "f"
+      },
+      "encounter_id": "ENC-1015-20250305",
+      "document_type": "Imaging Report - X-ray",
+      "title": "XR Bilateral Hands",
+      "service_date": "05 Mar 2025",
+      "content": "Exam: XR Bilateral Hands\nFindings: Periarticular osteopenia and early marginal erosions at the second MCP joints bilaterally.\nImpression: Findings compatible with erosive inflammatory arthritis."
+    },
+    {
+      "id": "EPIC-0001",
+      "patient_id": "1001",
+      "first_name": "Maria",
+      "last_name": "Gonzalez",
+      "birth_date": "03/14/1958",
+      "gender": "female",
+      "encounter": "ENC-1001-20250210",
+      "type": "Progress Note",
+      "description": "Endocrinology Progress Note",
+      "date": "February 10, 2025",
+      "text": "Chief Complaint: Poorly controlled blood sugars and a non-healing wound on the left foot.\n\nHistory: 67-year-old female with type 2 diabetes mellitus for 15 years on metformin and glargine. Reports polyuria and fatigue. Exam: 1.5 cm shallow ulcer on plantar surface of left first metatarsal head, no purulence, monofilament sensation reduced bilaterally.\n\nAssessment:\n1. Type 2 diabetes mellitus with hyperglycemia\n2. Diabetic foot ulcer, left foot\n3. Diabetic peripheral neuropathy\n\nPlan: Increase glargine to 28 units nightly, add empagliflozin, podiatry and wound care referral."
+    },
+    {
+      "record_id": "EPIC-9001",
+      "patient": {
+        "mrn": " 1002 ",
+        "name": "James Whitfield",
+        "dob": "19491102",
+        "sex": "m "
+      },
+      "encounter_id": "ENC-1002-20250315",
+      "document_type": "Imaging Report - X-ray",
+      "title": "XR Chest 2 Views",
+      "service_date": "03/15/25",
+      "content": "  Exam: XR Chest 2 Views\n\nFindings: Cardiomegaly. Bilateral interstitial opacities and small bilateral pleural effusions.\n\nImpression: Findings consistent with pulmonary edema and cardiomegaly.  "
+    },
+    {
+      "id": "EPIC-9002",
+      "patient_id": "mrn 1002",
+      "first_name": "Jim",
+      "last_name": "Whitfield",
+      "birth_date": "November 02, 1949",
+      "gender": "Male",
+      "type": "Progress Note",
+      "description": "Cardiology Telephone Note",
+      "date": "03/25/2025",
+      "text": "Chief Complaint: Follow-up call after discharge.\n\nHistory: Patient reports weight stable, mild ankle swelling, no orthopnea. Adherent to furosemide.\n\nAssessment:\n1. Heart failure with reduced ejection fraction, compensated\n\nPlan: Continue current regimen."
+    },
+    {
+      "id": "EPIC-9999",
+      "type": "Progress Note",
+      "date": "2025-05-05",
+      "text": "Chief Complaint: Unknown. Fax page 2 of 3, header missing."
+    }
+  ]
+}
