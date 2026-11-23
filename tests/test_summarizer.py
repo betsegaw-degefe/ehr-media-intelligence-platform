@@ -14,7 +14,7 @@ from backend.store import bundle_content_hash
 from backend.summarize import summarizer as SM
 from backend.summarize.cache import SummaryCache
 from backend.summarize.summarizer import (
-    PROMPT_VERSION, RULES_MODEL, ClinicalSummary, ClaudeBackend, RulesBackend, SummaryInput, StoredSummary,
+    PROMPT_VERSION, RULES_MODEL, ClinicalSummary, LLMBackend, RulesBackend, SummaryInput, StoredSummary,
     enforce_word_limit, grounding_warnings, notes_hash, prepare_input, summarize_bundle, word_count,
 )
 
@@ -215,10 +215,10 @@ def test_old_cache_schema_is_rebuilt():
 
 
 # ---------------------------------------------------------------- LLM backend (mocked client)
-def test_claude_backend_parses_structured_output(bundles):
+def test_llm_backend_parses_structured_output(bundles):
     captured: dict = {}
     text = SimpleNamespace(type="text", text=json.dumps(_summary().model_dump()))
-    out, served_by = ClaudeBackend(client=_client([text], captured=captured)).summarize(
+    out, served_by = LLMBackend(client=_client([text], captured=captured)).summarize(
         prepare_input("pat-001002", bundles["pat-001002"]))
     assert out == _summary() and served_by == "claude-opus-5-5"
     assert captured["output_config"]["format"]["type"] == "json_schema"
@@ -227,12 +227,12 @@ def test_claude_backend_parses_structured_output(bundles):
 
 def test_stored_model_is_the_model_that_answered(bundles):  # review finding 7
     text = SimpleNamespace(type="text", text=json.dumps(_summary().model_dump()))
-    backend = ClaudeBackend(model="claude-opus-5-5", client=_client([text], model="claude-opus-5"))
+    backend = LLMBackend(model="claude-opus-5-5", client=_client([text], model="claude-opus-5"))
     s = summarize_bundle("pat-001002", bundles["pat-001002"], backend)
     assert s.model == "claude-opus-5" and s.requested_model == "claude-opus-5-5"
 
 
 def test_response_without_text_block_raises_clear_error(bundles):  # review finding 8
-    backend = ClaudeBackend(client=_client([SimpleNamespace(type="thinking", thinking="")]))
+    backend = LLMBackend(client=_client([SimpleNamespace(type="thinking", thinking="")]))
     with pytest.raises(RuntimeError, match="no text block"):
         backend.summarize(prepare_input("pat-001002", bundles["pat-001002"]))

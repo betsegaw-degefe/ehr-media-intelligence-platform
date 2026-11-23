@@ -1,7 +1,7 @@
 """Run the full pipeline: ingest -> clean -> FHIR -> validate -> store -> summarize -> index.
 
 Usage
-  python scripts/run_pipeline.py                     # everything; Claude summaries if credentials exist
+  python scripts/run_pipeline.py                     # everything; LLM summaries if credentials exist
   python scripts/run_pipeline.py --summarizer rules  # no API calls (deterministic fallback summaries)
   python scripts/run_pipeline.py --skip-index        # stop before embedding
 """
@@ -24,14 +24,14 @@ from backend.fhir.validate import validate_bundle, write_report  # noqa: E402
 from backend.ingestion.pipeline import run_ingestion  # noqa: E402
 from backend.summarize.cache import SummaryCache  # noqa: E402
 from backend.summarize.summarizer import (  # noqa: E402
-    PROMPT_VERSION, RULES_MODEL, ClaudeBackend, RulesBackend, StoredSummary, SummaryBackend, notes_hash,
+    PROMPT_VERSION, RULES_MODEL, LLMBackend, RulesBackend, StoredSummary, SummaryBackend, notes_hash,
     summarize_bundle,
 )
 
 log = logging.getLogger("pipeline")
 
 
-LLM_SETUP_HINT = ("Set ANTHROPIC_API_KEY, and EHR_CLAUDE_MODEL to an Anthropic model if you override it, "
+LLM_SETUP_HINT = ("Set ANTHROPIC_API_KEY, and EHR_LLM_MODEL to an Anthropic model if you override it, "
                   "or run with --summarizer rules.")
 
 
@@ -51,12 +51,12 @@ def _pick_backend(choice: str) -> SummaryBackend:
     if choice == "rules":
         return RulesBackend()
     try:
-        backend = ClaudeBackend()
+        backend = LLMBackend()
         backend.client.models.retrieve(backend.model)
         return backend
     except Exception as e:  # noqa: BLE001 - any failure here means the LLM can't be used for this run
-        if choice == "claude":
-            raise SystemExit(f"--summarizer claude: the LLM is not usable ({type(e).__name__}: {e}). {LLM_SETUP_HINT}")
+        if choice == "llm":
+            raise SystemExit(f"--summarizer llm: the LLM is not usable ({type(e).__name__}: {e}). {LLM_SETUP_HINT}")
         log.warning("LLM unavailable (%s: %s); using rule-based summaries. %s", type(e).__name__, e, LLM_SETUP_HINT)
         return RulesBackend()
 
@@ -65,7 +65,7 @@ def _summarize_patient(pid: str, bundle: dict, dq: list[str], backend: SummaryBa
                        allow_fallback: bool) -> tuple[StoredSummary | None, SummaryBackend]:
     """Summarize one patient. Returns the summary (None if it failed) and the backend to use for the next patient.
     A temporary LLM error falls back to rules for this patient only; an error that will repeat for everyone
-    (credentials, unknown model) switches the rest of the run, or stops it with --summarizer claude. A patient whose
+    (credentials, unknown model) switches the rest of the run, or stops it with --summarizer llm. A patient whose
     summary fails with every backend is skipped, so one bad record can't stop the run."""
     try:
         return summarize_bundle(pid, bundle, backend, dq), backend
@@ -76,7 +76,7 @@ def _summarize_patient(pid: str, bundle: dict, dq: list[str], backend: SummaryBa
         unusable = _llm_unusable(e)
         if not allow_fallback:
             if unusable:
-                raise SystemExit(f"--summarizer claude: the LLM rejected the request ({type(e).__name__}). {LLM_SETUP_HINT}")
+                raise SystemExit(f"--summarizer llm: the LLM rejected the request ({type(e).__name__}). {LLM_SETUP_HINT}")
             return None, backend
         next_backend: SummaryBackend = backend
         if unusable:
@@ -92,7 +92,7 @@ def _summarize_patient(pid: str, bundle: dict, dq: list[str], backend: SummaryBa
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--raw-dir", type=Path, default=config.RAW_DIR)
-    ap.add_argument("--summarizer", choices=["auto", "claude", "rules"], default="auto")
+    ap.add_argument("--summarizer", choices=["auto", "llm", "rules"], default="auto")
     ap.add_argument("--skip-summaries", action="store_true")
     ap.add_argument("--skip-index", action="store_true")
     args = ap.parse_args()
