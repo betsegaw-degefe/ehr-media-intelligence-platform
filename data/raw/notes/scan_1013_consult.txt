@@ -1,0 +1,17 @@
+PATIENT: PETROVA, ELENA
+MRN: 001013
+DOB: December 29, 1960
+SEX: 2
+DATE OF SERVICE: 2025-06-17T09:30:00Z
+DOCUMENT TYPE: Consultation Note
+TITLE: Cardiology Consultation
+----
+Chief Complaint: Palpitations and irregular heartbeat.
+
+History: 64-year-old female with new-onset atrial fibrillation, rate 124. CHA2DS2-VASc score 3. Weight loss and heat intolerance reported.
+
+Assessment:
+1. New-onset atrial fibrillation with rapid ventricular response
+2. Suspected hyperthyroidism
+
+Plan: Metoprolol for rate control, start apixaban, endocrinology referral for thyroid workup.

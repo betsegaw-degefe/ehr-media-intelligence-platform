@@ -1,0 +1,18 @@
+PATIENT: Samuel Johnson
+MRN: mrn 1014
+DOB: 19370303
+SEX: Male
+DOCUMENT TYPE: Progress Note
+TITLE: Geriatric Psychiatry Follow-up
+----
+Seen in clinic on August 26, 2025.
+Chief Complaint: Low mood, poor appetite and memory complaints.
+
+History: 88-year-old male, PHQ-9 score 17, MoCA 24/30. Lives alone since spouse died last year.
+
+Assessment:
+1. Major depressive disorder, moderate
+2. Mild cognitive impairment
+3. Vitamin B12 deficiency
+
+Plan: Start sertraline 25 mg, B12 replacement, home health social work referral.

@@ -1,0 +1,17 @@
+PATIENT: Williams, Sandra
+MRN:  1009 
+DOB: 1966-02-09T09:30:00Z
+SEX: f
+DATE OF SERVICE: 02 Sep 2025
+DOCUMENT TYPE: Progress Note
+TITLE: Primary Care Progress Note
+----
+Chief Complaint: Headaches and elevated home blood pressure readings.
+
+History: 59-year-old female, BP 168/98 and 164/96 on repeat. Morning occipital headaches for 2 weeks. No focal neurologic deficits.
+
+Assessment:
+1. Uncontrolled essential hypertension
+2. Hyperlipidemia
+
+Plan: Add amlodipine 5 mg, start atorvastatin 40 mg, recheck BP in 2 weeks.

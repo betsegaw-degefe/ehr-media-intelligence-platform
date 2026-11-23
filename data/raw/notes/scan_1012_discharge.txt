@@ -1,0 +1,17 @@
+PATIENT: Brown, Michael
+MRN: 1012
+DOB: 21 May 1978
+SEX: male
+DATE OF SERVICE: 11/04/25
+DOCUMENT TYPE: Discharge Summary
+TITLE: Discharge Summary
+----
+Chief Complaint: Periumbilical pain migrating to the right lower quadrant with nausea.
+
+History: 47-year-old male, McBurney point tenderness, temperature 38.2 C. Underwent uncomplicated laparoscopic appendectomy on hospital day 1.
+
+Assessment:
+1. Acute appendicitis, non-perforated
+2. Status post laparoscopic appendectomy
+
+Plan: Advance diet as tolerated, no heavy lifting for 2 weeks, surgical clinic follow-up.
