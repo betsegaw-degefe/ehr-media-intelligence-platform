@@ -1,0 +1,32 @@
+MRN,Patient Name,DOB,Sex,Collected,Panel,Test,LOINC,Result,Units,Ref Range,Flag
+1001,"Gonzalez, Maria",19580314,2,02/10/2025,Diabetes Panel,Hemoglobin A1c,4548-4,9.4,%,4.0-5.6,H
+001001,"GONZALEZ, MARIA",03/14/58,Female ,10 Feb 2025,Diabetes Panel,Glucose,2345-7,212,mg/dL,70-99,H
+mrn 1001,Maria Gonzalez,1958-03-14T09:30:00Z,f,"February 10, 2025",Diabetes Panel,Creatinine,2160-0,1.1,mg/dL,0.6-1.2,
+ 1002 ,"Whitfield, James",1949-11-02,MALE,20250315,Cardiac Panel,B-type natriuretic peptide,30934-4,1250,pg/mL,0-100,H
+MRN00001002,"WHITFIELD, JAMES",11/02/1949,M,03/15/25,Basic Metabolic Panel,Sodium,2951-2,131,mmol/L,135-145,L
+MRN-001002,James Whitfield,02 Nov 1949,male,2025-03-15T09:30:00Z,Basic Metabolic Panel,Potassium,2823-3,4.8,mmol/L,3.5-5.1,
+1003,"Rahman, Aisha","July 22, 1990",2,2025-01-06,CBC,White blood cell count,6690-2,15.2,10*3/uL,4.0-11.0,H
+001003,"RAHMAN, AISHA",19900722,Female ,01/06/2025,Inflammatory Markers,C-reactive protein,1988-5,88,mg/L,0-10,H
+mrn 1004,Robert Chen,01/30/62,m ,30 Mar 2025,Arterial Blood Gas,pCO2 arterial,2019-8,52,mm[Hg],35-45,H
+ 1004 ,"Chen, Robert",1962-01-30T09:30:00Z,MALE,"March 30, 2025",Arterial Blood Gas,pH arterial,2744-1,7.33,[pH],7.35-7.45,L
+MRN00001005,"OKAFOR, LINDA",1971-09-05,F,20250520,CBC,Hemoglobin,718-7,13.1,g/dL,12.0-15.5,
+MRN-001070,Patricia Nguyen,04/18/1953,female,07/08/25,Renal Panel,Creatinine,2160-0,1.6,mg/dL,0.5-1.1,H
+1070,"Nguyen, Patricia",18 Apr 1953,2,2025-07-08T09:30:00Z,Renal Panel,eGFR,62238-1,38,mL/min/1.73m2,>60,L
+001070,"NGUYEN, PATRICIA","April 18, 1953",Female ,2025-07-08,Renal Panel,Potassium,2823-3,5.9,mmol/L,3.5-5.1,H
+mrn 1008,Kevin O'Brien,20010627,m ,08/14/2025,CBC,Eosinophils,26449-9,0.6,10*3/uL,0.0-0.5,H
+ 1009 ,"Williams, Sandra",02/09/66,FEMALE,02 Sep 2025,Lipid Panel,LDL cholesterol,13457-7,182,mg/dL,<100,H
+MRN00001009,"WILLIAMS, SANDRA",1966-02-09T09:30:00Z,F,"September 02, 2025",Lipid Panel,Total cholesterol,2093-3,268,mg/dL,<200,H
+MRN-001010,Thomas Anderson,1944-08-15,male,20251008,Coagulation,INR,6301-6,1.0,,0.8-1.2,
+1010,"Anderson, Thomas",08/15/1944,1,10/08/25,Chemistry,Glucose,2345-7,148,mg/dL,70-99,H
+001011,"KIM, GRACE",03 Oct 1995,Female ,2025-04-22T09:30:00Z,CBC,Hemoglobin,718-7,8.9,g/dL,12.0-15.5,L
+mrn 1011,Grace Kim,"October 03, 1995",f,2025-04-22,Iron Studies,Ferritin,2276-4,6,ng/mL,15-150,L
+ 1012 ,"Brown, Michael",19780521,MALE,11/02/2025,CBC,White blood cell count,6690-2,13.8,10*3/uL,4.0-11.0,H
+MRN00001013,"PETROVA, ELENA",12/29/60,F,17 Jun 2025,Thyroid,TSH,3016-3,0.05,m[IU]/L,0.4-4.0,L
+MRN-001013,Elena Petrova,1960-12-29T09:30:00Z,female,"June 17, 2025",Thyroid,Free T4,3024-7,3.1,ng/dL,0.8-1.8,H
+1014,"Johnson, Samuel",1937-03-03,1,20250826,Vitamins,Vitamin B12,2132-9,160,pg/mL,200-900,L
+001014,"JOHNSON, SAMUEL",03/03/1937,Male,08/26/25,Thyroid,TSH,3016-3,2.1,m[IU]/L,0.4-4.0,
+mrn 1015,Fatima Hassan,17 Jan 1982,f,2025-03-05T09:30:00Z,Rheumatology,Rheumatoid factor,11572-5,86,[IU]/mL,<14,H
+ 1015 ,"Hassan, Fatima","January 17, 1982",FEMALE,2025-03-05,Inflammatory Markers,C-reactive protein,1988-5,24,mg/L,0-10,H
+1001,"Gonzalez, Maria",19580314,2,02/10/2025,Diabetes Panel,Hemoglobin A1c,4548-4,9.4,%,4.0-5.6,H
+MRN-001002,James Whitfield,02 Nov 1949,male,2025-03-15T09:30:00Z,Basic Metabolic Panel,Potassium,2823-3,4.8,mmol/L,3.5-5.1,
+,Grace Kim,10/03/1995,F,2025-04-22,Iron Studies,Transferrin saturation,2502-3,7,%,20-50,L

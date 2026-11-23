@@ -1,0 +1,15 @@
+PATIENT: Hassan, Fatima
+MRN:  1015 
+DOB: 01/17/82
+DATE OF SERVICE: 03/05/2025
+DOCUMENT TYPE: Consultation Note
+TITLE: Rheumatology Consultation
+----
+Chief Complaint: Morning stiffness and swelling of both hands for 4 months.
+
+History: 43-year-old female, morning stiffness lasting 90 minutes. Synovitis of bilateral MCP 2-3 and wrists.
+
+Assessment:
+1. Seropositive rheumatoid arthritis
+
+Plan: Start methotrexate 15 mg weekly with folic acid, short prednisone bridge, baseline hepatitis panel.

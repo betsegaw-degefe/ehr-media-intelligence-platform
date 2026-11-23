@@ -1,0 +1,16 @@
+PATIENT: Linda Okafor
+MRN: mrn 1005
+DOB: 09/05/71
+SEX: Female 
+DATE OF SERVICE: 05/12/2025
+DOCUMENT TYPE: Referral Letter
+TITLE: Scanned Referral Letter
+----
+Chief Complaint: Referral for evaluation of a left breast mass.
+
+History: Dear colleague, I am referring this patient who presented with a self-detected left breast lump. Screening mammogram one year ago was normal. Please evaluate.
+
+Assessment:
+1. Left breast mass
+
+Plan: Surgical evaluation requested.
