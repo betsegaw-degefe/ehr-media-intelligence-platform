@@ -20,3 +20,7 @@ AI_DISCLAIMER = (
     "AI-generated summary for information retrieval only. It is not a clinical decision, "
     "diagnosis, or recommendation. Verify all findings against the source records."
 )
+
+# Browser origins allowed to call the API cross-origin (comma-separated). Empty by default: the UI is served from
+# the same origin, so CORS is only needed for the frontend's ?api= override.
+CORS_ORIGINS = [o.strip() for o in os.getenv("EHR_CORS_ORIGINS", "").split(",") if o.strip()]
