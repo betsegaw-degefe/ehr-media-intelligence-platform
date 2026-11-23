@@ -1,7 +1,7 @@
 # EHR Media Intelligence Platform: Write-up
 
 **Pipeline:** synthetic JSON/CSV/TXT → cleaned Pydantic records with audit log → FHIR R4 Bundles (validated, SQLite) →
-Claude summaries (cached) → MiniLM + ChromaDB → `POST /search` → Tailwind UI. 15 patients, 51 records, 15/15 Bundles valid.
+LLM summaries (cached) → MiniLM + ChromaDB → `POST /search` → Tailwind UI. 15 patients, 51 records, 15/15 Bundles valid.
 
 ## Tradeoffs and why
 - **Conservative identity resolution.** Records are linked only on an exact name + DOB match, and typo'd MRNs are
@@ -29,15 +29,15 @@ codes; hybrid search (BM25 + embeddings) and a clinical embedding model; an LLM-
 clinician-labelled reference summaries; authentication, PHI audit logging and HIPAA controls; and incremental
 re-indexing in place of full rebuilds.
 
-## FHIR and clinical concepts I researched
+## FHIR and clinical concepts
+I didn't need to do specific research for this; I drew on my past experience working with FHIR. The main concepts
+I applied:
 - **Resource choice:** `DocumentReference` (an indexed pointer to a document, e.g. notes and scanned letters) vs
   `DiagnosticReport` (an interpreted result, e.g. imaging impressions and lab panels), with `Observation` per analyte.
 - **Bundles:** type `collection` vs `document`; `fullUrl` and how relative references resolve. `DocumentReference.date`
   is an `instant`, so it needs a time and timezone. R4 `Encounter.class` is a single Coding.
 - **Codes:** LOINC document types (18842-5 discharge summary, 11506-3 progress note), the v2-0074 `RAD`/`LAB`
   categories, v2-0203 `MR` identifiers with `use: old` for merged MRNs, and v3 observation interpretation (H/L).
-- **Clinical:** BI-RADS categories, the Fleischner guideline for pulmonary nodule follow-up, and CHA₂DS₂-VASc. These
-  shaped which findings the summarizer should surface as anomalies.
 
 ## How I validated AI summary quality
 1. **Constrained generation.** A JSON-schema structured output covers every required field. The prompt rules forbid
@@ -48,6 +48,7 @@ re-indexing in place of full rebuilds.
    and each cited record id must exist. Failures are stored and shown in the UI as quality warnings.
 3. **Tests.** The tests inject a fabricated diagnosis, an invented lab value and an unknown record id, and assert all
    three are caught. Over-limit outputs trigger the retry and trim.
-4. **Manual review against the source.** For each patient I compared the summary with the source records, checking
-   that expected key findings were present (e.g. BI-RADS 4C, 8 mm nodule follow-up, K⁺ 5.9, Na 131) and that nothing
-   was invented. [Add your spot-check results here after running with an API key.]
+4. **No manual review of LLM output.** I did not have an LLM API key, so the LLM summarizer has not been run on this
+   dataset. The summaries in the demo come from the rule-based fallback, and the LLM integration is tested only with
+   a mocked API response. Quality assurance for real LLM output therefore rests on points 1 and 2, which run
+   automatically on every summary once a key is configured, and on the tests in point 3.

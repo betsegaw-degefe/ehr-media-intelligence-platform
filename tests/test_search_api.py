@@ -251,8 +251,8 @@ def test_index_uses_the_same_summary_as_the_patient_page(raw_dir, tmp_path, monk
         monkeypatch.setattr(sys, "argv", ["run_pipeline.py", "--raw-dir", str(raw_dir), *args])
         run_pipeline.main()
 
-    monkeypatch.setattr(run_pipeline, "ClaudeBackend", FakeLLM)
-    run("--summarizer", "claude")
+    monkeypatch.setattr(run_pipeline, "LLMBackend", FakeLLM)
+    run("--summarizer", "llm")
     run("--summarizer", "rules")
     got = index_mod.SearchIndex(HashEmbedder(), tmp_path / "chroma").collection.get(
         ids=[f"{SUMMARY_TYPE}/pat-001002"], include=["metadatas"])

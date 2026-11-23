@@ -57,7 +57,7 @@ def pipeline(raw_dir, tmp_path, monkeypatch):
 
     def run(*args, llm=None):
         if llm is not None:
-            monkeypatch.setattr(run_pipeline, "ClaudeBackend", llm)
+            monkeypatch.setattr(run_pipeline, "LLMBackend", llm)
         monkeypatch.setattr(sys, "argv", ["run_pipeline.py", "--raw-dir", str(raw_dir), "--skip-index", *args])
         run_pipeline.main()
         return {pid: s["model"] for pid, s in json.loads((tmp_path / "out" / "summaries.json").read_text()).items()}
@@ -68,15 +68,15 @@ def pipeline(raw_dir, tmp_path, monkeypatch):
 def test_llm_mode_fails_fast_when_the_llm_is_unusable(pipeline):
     no_key = TypeError("Could not resolve authentication method. Expected one of api_key, auth_token...")
     with pytest.raises(SystemExit) as exc:
-        pipeline("--summarizer", "claude", llm=make_llm(fail_check=no_key))
+        pipeline("--summarizer", "llm", llm=make_llm(fail_check=no_key))
     assert "not usable" in str(exc.value) and "ANTHROPIC_API_KEY" in str(exc.value)
 
 
 def test_llm_mode_rejects_an_unknown_model_before_summarizing(pipeline):
     response = httpx.Response(404, request=httpx.Request("GET", "https://api.anthropic.com/v1/models/gpt-4o"))
     not_found = anthropic.NotFoundError("model: gpt-4o", response=response, body=None)
-    with pytest.raises(SystemExit, match="EHR_CLAUDE_MODEL"):
-        pipeline("--summarizer", "claude", llm=make_llm(fail_check=not_found))
+    with pytest.raises(SystemExit, match="EHR_LLM_MODEL"):
+        pipeline("--summarizer", "llm", llm=make_llm(fail_check=not_found))
 
 
 def test_auto_mode_falls_back_to_rules_when_the_llm_is_unusable(pipeline):
@@ -117,7 +117,7 @@ def test_a_patient_that_fails_everywhere_is_skipped_and_the_run_exits_nonzero(pi
 
 def test_llm_mode_transient_error_skips_the_patient_without_fallback(pipeline, tmp_path):
     with pytest.raises(SystemExit) as exc:
-        pipeline("--summarizer", "claude", llm=make_llm(fail_for={"pat-001002": RuntimeError("overloaded")}))
+        pipeline("--summarizer", "llm", llm=make_llm(fail_for={"pat-001002": RuntimeError("overloaded")}))
     assert exc.value.code == 1
     written = json.loads((tmp_path / "out" / "summaries.json").read_text())
     assert "pat-001002" not in written and set(written[p]["model"] for p in written) == {"fake-llm"}
