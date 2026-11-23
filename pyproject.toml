@@ -1,7 +1,7 @@
 [project]
 name = "ehr-media-intelligence"
 version = "1.0.0"
-description = "Ingest messy synthetic EHR records, normalize to FHIR R4, summarize with Claude, and search semantically."
+description = "Ingest messy synthetic EHR records, normalize to FHIR R4, summarize with an LLM, and search semantically."
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]

@@ -11,7 +11,7 @@ from backend.config import AI_DISCLAIMER, SUMMARY_WORD_LIMIT
 from backend.store import bundle_content_hash
 from backend.summarize.cache import SummaryCache
 from backend.summarize.summarizer import (
-    PROMPT_VERSION, ClaudeBackend, ClinicalSummary, RulesBackend, build_prompt, summarize_bundle,
+    PROMPT_VERSION, ClinicalSummary, LLMBackend, RulesBackend, build_prompt, summarize_bundle,
 )
 
 
@@ -101,7 +101,7 @@ def test_cache_hit_skips_backend_and_content_change_misses(bundles):
     assert cache.latest("pat-001002").model == "fake-model"
 
 
-def test_claude_backend_parses_structured_output():
+def test_llm_backend_parses_structured_output():
     payload = _summary().model_dump()
     captured = {}
 
@@ -111,7 +111,7 @@ def test_claude_backend_parses_structured_output():
                                content=[SimpleNamespace(type="text", text=json.dumps(payload))])
 
     client = SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(create=create)))
-    out = ClaudeBackend(client=client).summarize("prompt")
+    out = LLMBackend(client=client).summarize("prompt")
     assert out == _summary()
     assert captured["output_config"]["format"]["type"] == "json_schema"
     assert "Use only facts stated in the records" in captured["system"]

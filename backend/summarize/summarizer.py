@@ -2,9 +2,9 @@
 
 Flow per patient
   bundle -> context (records as tagged text) -> cache lookup (patient_id + bundle content hash)
-         -> Claude (structured JSON output) -> word-limit + grounding checks -> cache -> StoredSummary
+         -> LLM (structured JSON output) -> word-limit + grounding checks -> cache -> StoredSummary
 
-If no Anthropic credentials are available, a deterministic rule-based extractor produces a summary in the
+If no LLM API credentials are available, a deterministic rule-based extractor produces a summary in the
 same schema (clearly labelled, confidence "low") so the rest of the platform still runs end to end.
 """
 
@@ -19,7 +19,7 @@ from typing import Any, Literal, Protocol
 
 from pydantic import BaseModel, Field
 
-from backend.config import AI_DISCLAIMER, CLAUDE_MODEL, SUMMARY_WORD_LIMIT
+from backend.config import AI_DISCLAIMER, LLM_MODEL, SUMMARY_WORD_LIMIT
 from backend.store import bundle_content_hash
 
 log = logging.getLogger(__name__)
@@ -224,8 +224,10 @@ class SummaryBackend(Protocol):
     def summarize(self, prompt: str, feedback: str | None = None) -> ClinicalSummary: ...
 
 
-class ClaudeBackend:
-    def __init__(self, model: str = CLAUDE_MODEL, client: Any = None):
+class LLMBackend:
+    """LLM summarizer. Implemented with the Anthropic Messages API (model set by EHR_LLM_MODEL)."""
+
+    def __init__(self, model: str = LLM_MODEL, client: Any = None):
         import anthropic
 
         self.model = model

@@ -13,7 +13,7 @@ DB_PATH = Path(os.getenv("EHR_DB_PATH", DATA_DIR / "ehr.db"))
 CHROMA_DIR = Path(os.getenv("EHR_CHROMA_DIR", DATA_DIR / "chroma"))
 
 EMBEDDING_MODEL = os.getenv("EHR_EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
-CLAUDE_MODEL = os.getenv("EHR_CLAUDE_MODEL", "claude-opus-5-5")
+LLM_MODEL = os.getenv("EHR_LLM_MODEL", "claude-opus-5-5")
 SUMMARY_WORD_LIMIT = 200
 
 AI_DISCLAIMER = (

@@ -1,7 +1,7 @@
 """Run the full pipeline: ingest -> clean -> FHIR -> validate -> store -> summarize -> index.
 
 Usage
-  python scripts/run_pipeline.py                     # everything; Claude summaries if credentials exist
+  python scripts/run_pipeline.py                     # everything; LLM summaries if credentials exist
   python scripts/run_pipeline.py --summarizer rules  # no API calls (deterministic fallback summaries)
   python scripts/run_pipeline.py --skip-index        # stop before embedding
 """
@@ -23,7 +23,7 @@ from backend.fhir.validate import validate_bundle, write_report  # noqa: E402
 from backend.ingestion.pipeline import run_ingestion  # noqa: E402
 from backend.summarize.cache import SummaryCache  # noqa: E402
 from backend.summarize.summarizer import (  # noqa: E402
-    PROMPT_VERSION, ClaudeBackend, RulesBackend, SummaryBackend, summarize_bundle,
+    PROMPT_VERSION, LLMBackend, RulesBackend, SummaryBackend, summarize_bundle,
 )
 
 log = logging.getLogger("pipeline")
@@ -33,18 +33,18 @@ def _pick_backend(choice: str) -> SummaryBackend:
     if choice == "rules":
         return RulesBackend()
     try:
-        return ClaudeBackend()
+        return LLMBackend()
     except Exception as e:  # noqa: BLE001 - e.g. SDK cannot resolve credentials
-        if choice == "claude":
+        if choice == "llm":
             raise
-        log.warning("Claude unavailable (%s); using rule-based summaries.", e)
+        log.warning("LLM unavailable (%s); using rule-based summaries.", e)
         return RulesBackend()
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--raw-dir", type=Path, default=config.RAW_DIR)
-    ap.add_argument("--summarizer", choices=["auto", "claude", "rules"], default="auto")
+    ap.add_argument("--summarizer", choices=["auto", "llm", "rules"], default="auto")
     ap.add_argument("--skip-summaries", action="store_true")
     ap.add_argument("--skip-index", action="store_true")
     args = ap.parse_args()
@@ -101,7 +101,7 @@ def main() -> None:
                         s = summarize_bundle(p.patient_id, b, backend, dq)
                     except Exception as e:  # noqa: BLE001 - one failed patient should not stop the run
                         log.error("Summary failed for %s: %s", p.patient_id, e)
-                        if isinstance(backend, ClaudeBackend) and args.summarizer == "auto":
+                        if isinstance(backend, LLMBackend) and args.summarizer == "auto":
                             log.warning("Falling back to rule-based summaries for remaining patients.")
                             backend = RulesBackend()
                             s = summarize_bundle(p.patient_id, b, backend, dq)
